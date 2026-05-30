@@ -20,11 +20,11 @@ export default function DownloadGrid() {
     {
       platform: "Windows",
       tag: "Desktop",
-      format: ".exe — 64-bit Installer",
+      format: ".zip — Portable",
       version: "v1.0.0 Stable",
       icon: "/images/windows-icon.png",
       actionLabel: "Unduh untuk Windows",
-      actionUrl: "/uwangku-apps/uwangku-windows.exe",
+      actionUrl: "/uwangku-apps/uwangku.zip",
       isAvailable: true,
     },
     {
