@@ -1,26 +1,232 @@
 @import "tailwindcss";
 
+@theme {
+  --font-outfit: var(--font-outfit), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+
+  /* ── Light scheme (from theme.dart lightScheme) ─────────────────── */
+  --color-m3-primary-light: #466730;
+  --color-m3-on-primary-light: #ffffff;
+  --color-m3-primary-container-light: #c7eea9;
+  --color-m3-on-primary-container-light: #2f4f1b;
+  --color-m3-secondary-light: #56624b;
+  --color-m3-on-secondary-light: #ffffff;
+  --color-m3-secondary-container-light: #d9e7ca;
+  --color-m3-tertiary-light: #386665;
+  --color-m3-on-tertiary-light: #ffffff;
+  --color-m3-tertiary-container-light: #bbeceb;
+  --color-m3-surface-light: #f8faf0;
+  --color-m3-on-surface-light: #191d16;
+  --color-m3-on-surface-variant-light: #43483e;
+  --color-m3-surface-container-lowest-light: #ffffff;
+  --color-m3-surface-container-low-light: #f3f5ea;
+  --color-m3-surface-container-light: #edefe4;
+  --color-m3-surface-container-high-light: #e7e9df;
+  --color-m3-outline-light: #74796d;
+  --color-m3-outline-variant-light: #c4c8bb;
+  --color-m3-error-light: #ba1a1a;
+
+  /* ── Dark scheme (from theme.dart darkScheme) ──────────────────── */
+  --color-m3-primary-dark: #acd28f;
+  --color-m3-on-primary-dark: #193705;
+  --color-m3-primary-container-dark: #2f4f1b;
+  --color-m3-on-primary-container-dark: #c7eea9;
+  --color-m3-secondary-dark: #bdcbaf;
+  --color-m3-on-secondary-dark: #283420;
+  --color-m3-tertiary-dark: #a0cfce;
+  --color-m3-on-tertiary-dark: #003737;
+  --color-m3-surface-dark: #11140e;
+  --color-m3-on-surface-dark: #e1e4d9;
+  --color-m3-on-surface-variant-dark: #c4c8bb;
+  --color-m3-surface-container-lowest-dark: #0c0f09;
+  --color-m3-surface-container-low-dark: #191d16;
+  --color-m3-surface-container-dark: #1d211a;
+  --color-m3-surface-container-high-dark: #282b24;
+  --color-m3-outline-dark: #8e9286;
+  --color-m3-outline-variant-dark: #43483e;
+  --color-m3-error-dark: #ffb4ab;
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════
+   DEFAULT: Light Mode
+   Matches theme.dart lightScheme()
+═══════════════════════════════════════════════════ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core surface */
+  --background:           #f8faf0;   /* surface */
+  --foreground:           #191d16;   /* onSurface */
+  --foreground-variant:   #43483e;   /* onSurfaceVariant */
+
+  /* Surface containers */
+  --surface-lowest:       #ffffff;
+  --surface-low:          #f3f5ea;
+  --surface-container:    #edefe4;   /* surfaceContainer */
+  --surface-high:         #e7e9df;
+
+  /* Primary (Forest Green) */
+  --primary:              #466730;
+  --on-primary:           #ffffff;
+  --primary-container:    #c7eea9;
+  --on-primary-container: #2f4f1b;
+
+  /* Secondary */
+  --secondary:            #56624b;
+  --on-secondary:         #ffffff;
+  --secondary-container:  #d9e7ca;
+
+  /* Tertiary / Accent (Teal) */
+  --accent:               #386665;
+  --on-accent:            #ffffff;
+  --accent-container:     #bbeceb;
+  --on-accent-container:  #1e4e4e;
+
+  /* Outline */
+  --outline:              #c4c8bb;   /* outlineVariant for subtle borders */
+  --outline-strong:       #74796d;   /* outline for emphasis */
+
+  /* Error */
+  --error:                #ba1a1a;
+
+  /* Theme toggle indicator */
+  --theme-mode: "light";
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ═══════════════════════════════════════════════════
+   DARK MODE — class-based (manual toggle)
+   Matches theme.dart darkScheme()
+═══════════════════════════════════════════════════ */
+html.dark {
+  --background:           #11140e;
+  --foreground:           #e1e4d9;
+  --foreground-variant:   #c4c8bb;
+
+  --surface-lowest:       #0c0f09;
+  --surface-low:          #191d16;
+  --surface-container:    #1d211a;
+  --surface-high:         #282b24;
+
+  --primary:              #acd28f;
+  --on-primary:           #193705;
+  --primary-container:    #2f4f1b;
+  --on-primary-container: #c7eea9;
+
+  --secondary:            #bdcbaf;
+  --on-secondary:         #283420;
+  --secondary-container:  #3e4a35;
+
+  --accent:               #a0cfce;
+  --on-accent:            #003737;
+  --accent-container:     #1e4e4e;
+  --on-accent-container:  #bbeceb;
+
+  --outline:              #43483e;
+  --outline-strong:       #8e9286;
+
+  --error:                #ffb4ab;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ═══════════════════════════════════════════════════
+   BASE STYLES
+═══════════════════════════════════════════════════ */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════
+   M3 COMPONENT UTILITIES
+═══════════════════════════════════════════════════ */
+.m3-card-outlined {
+  background-color: var(--background);
+  border: 1px solid var(--outline);
+  border-radius: 24px;
+}
+
+.m3-card-filled {
+  background-color: var(--surface-container);
+  border-radius: 24px;
+}
+
+.m3-card-container {
+  background-color: var(--surface-container);
+  border: 1px solid var(--outline);
+  border-radius: 24px;
+}
+
+.m3-button-pill {
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.m3-button-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.m3-button-primary:hover {
+  opacity: 0.88;
+}
+
+.m3-button-accent {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.m3-button-accent:hover {
+  opacity: 0.88;
+}
+
+.m3-button-tonal {
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.m3-button-tonal:hover {
+  opacity: 0.88;
+}
+
+.m3-button-outlined {
+  border: 1px solid var(--outline-strong);
+  color: var(--foreground);
+  background-color: transparent;
+}
+
+.m3-button-outlined:hover {
+  background-color: var(--surface-container);
+}
+
+/* ═══════════════════════════════════════════════════
+   TYPING CURSOR BLINK
+═══════════════════════════════════════════════════ */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* ═══════════════════════════════════════════════════
+   SMOOTH TRANSITION FOR THEME SWITCH
+═══════════════════════════════════════════════════ */
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+}
+
+/* Disable transitions on page load to prevent flash */
+html.no-transitions * {
+  transition: none !important;
 }

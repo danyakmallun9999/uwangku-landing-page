@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uwangku - Landing Page
 
-## Getting Started
+Landing Page premium, minimalis, dan sangat interaktif untuk **Uwangku**—aplikasi pencatatan keuangan personal dengan arsitektur *local-first*, didukung pemindaian struk OCR, dan analisis teks AI.
 
-First, run the development server:
+## Fitur Halaman Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Deteksi OS & Tombol Unduh Utama Adaptif**: Secara dinamis menampilkan tombol unduh sesuai sistem operasi klien (Windows atau Android) dan menyediakan tautan download installer alternatif.
+2. **Custom Numpad Simulator**: Demo keyboard angka bawaan yang interaktif di mana pengguna dapat mengklik tombol dan melihat nominal rupiah terformat langsung.
+3. **AI Scan OCR Simulator**: Visualisasi pemindaian struk menggunakan animasi CSS laser radar dan ekstraksi nominal.
+4. **Simulator Parser Teks NLP**: Input chat simulasi dengan *typing effect* untuk memproses kalimat alami menjadi skema data transaksi JSON secara realtime.
+5. **Visualisasi Aliran Data Local-First**: Diagram interaktif sync SQLite ke PocketBase Cloud dengan tombol **Online/Offline** untuk mensimulasikan penyimpanan lokal yang mandiri.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Teknologi Utama
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Core**: Next.js 16 (React 19)
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **Icons**: Lucide Icons
+- **Fonts**: Outfit & Inter (Google Fonts)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Cara Menjalankan Proyek
 
-## Learn More
+1. **Pasang Dependensi**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Jalankan Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Buka [http://localhost:3000](http://localhost:3000) di peramban Anda untuk melihat hasilnya.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Kompilasi Produksi**:
+   ```bash
+   npm run build
+   ```
