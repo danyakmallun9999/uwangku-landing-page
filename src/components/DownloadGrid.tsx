@@ -24,7 +24,7 @@ export default function DownloadGrid() {
       version: "v1.0.0 Stable",
       icon: "/images/windows-icon.png",
       actionLabel: "Unduh untuk Windows",
-      actionUrl: "/uwangku-apps/uwangku.msix",
+      actionUrl: "/uwangku-apps/Uwangku-Windows.zip",
       isAvailable: true,
     },
     {
@@ -34,7 +34,7 @@ export default function DownloadGrid() {
       version: "v1.0.0 Stable",
       icon: "/images/android-icon.png",
       actionLabel: "Unduh .APK Android",
-      actionUrl: "/uwangku-apps/uwangku.apk",
+      actionUrl: "/uwangku-apps/Uwangku.apk",
       isAvailable: true,
     },
     {
