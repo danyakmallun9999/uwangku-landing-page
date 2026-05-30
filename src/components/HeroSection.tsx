@@ -32,7 +32,7 @@ export default function HeroSection() {
   }, []);
 
   const downloadLinks = {
-    windows: "/uwangku-apps/uwangku.zip",
+    windows: "/uwangku-apps/uwangku.msix",
     android: "/uwangku-apps/uwangku.apk",
   };
 
