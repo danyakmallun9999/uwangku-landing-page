@@ -34,7 +34,7 @@ export default function DownloadGrid() {
       version: "v1.0.0 Stable",
       icon: "/images/android-icon.png",
       actionLabel: "Unduh .APK Android",
-      actionUrl: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v1.0.4/uwangku-release-v1.0.4.apk",
+      actionUrl: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v1.0.5/uwangku-release-v1.0.5.apk",
       isAvailable: true,
     },
     {
