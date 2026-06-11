@@ -1,8 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
+
+const Logo3D = dynamic(() => import("@/components/Logo3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-[500px] md:h-[600px] w-full items-center justify-center">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-[var(--outline)] border-t-[var(--primary)]" />
+    </div>
+  ),
+});
 
 const WindowsIcon = () => (
   <svg viewBox="0 0 24 24" className="mr-2 h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -112,100 +122,15 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* M3 Flat Line-Art Mockup */}
+          {/* 3D Logo Model */}
           <div className="relative flex justify-center lg:justify-end">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="w-full max-w-[380px]"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="w-full"
             >
-              {/* Flat Device Frame */}
-              <div className="m3-card-outlined p-2 bg-[var(--surface-container)]">
-                
-                {/* Inner Screen Area */}
-                <div className="rounded-[18px] bg-[var(--background)] border border-[var(--outline)] px-5 pt-8 pb-6 flex flex-col h-[600px] overflow-hidden relative">
-                  
-                  {/* Top Nav Line-Art */}
-                  <div className="flex justify-between items-center mb-8">
-                    <div className="flex gap-2">
-                      <div className="h-4 w-4 rounded-full border-2 border-[var(--primary)]" />
-                      <div className="h-4 w-12 rounded-full bg-[var(--outline)]" />
-                    </div>
-                    <div className="h-8 w-8 rounded-full bg-[var(--outline)]" />
-                  </div>
-
-                  {/* Balance Card Flat */}
-                  <div className="m3-card-filled p-5 mb-8 flex flex-col relative overflow-hidden">
-                    {/* Decorative geometric accent */}
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--primary)] rounded-bl-[100px] opacity-10" />
-                    <span className="text-[10px] font-bold text-[var(--foreground)] opacity-50 uppercase tracking-widest mb-1">
-                      Total Saldo
-                    </span>
-                    <span className="font-heading text-3xl font-black text-[var(--foreground)]">
-                      Rp 12.450.000
-                    </span>
-                  </div>
-
-                  {/* Mini Chart Line-Art Representation */}
-                  <div className="mb-8 border border-[var(--outline)] rounded-2xl p-4 bg-[var(--surface-container)]">
-                    <div className="flex justify-between items-end h-16 gap-2">
-                      {[30, 45, 25, 60, 40, 80, 50].map((height, i) => (
-                        <div key={i} className="flex-1 bg-[var(--outline)] rounded-t-sm" style={{ height: `${height}%` }}>
-                          {i === 5 && <div className="w-full h-full bg-[var(--accent)] rounded-t-sm" />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Transaction List Line-Art */}
-                  <div className="flex-1">
-                    <h4 className="text-xs font-bold text-[var(--foreground)] mb-4">Hari Ini</h4>
-                    <div className="space-y-3">
-                      
-                      {/* Item 1 */}
-                      <div className="flex items-center justify-between pb-3 border-b border-[var(--outline)]">
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-[var(--outline)] flex items-center justify-center">
-                            <div className="h-4 w-4 bg-[var(--foreground)] opacity-20 rounded-sm" />
-                          </div>
-                          <div className="space-y-1.5">
-                            <div className="h-3 w-20 bg-[var(--primary)] rounded-full opacity-80" />
-                            <div className="h-2 w-12 bg-[var(--outline)] rounded-full" />
-                          </div>
-                        </div>
-                        <div className="h-3 w-16 bg-[var(--primary)] rounded-full" />
-                      </div>
-
-                      {/* Item 2 */}
-                      <div className="flex items-center justify-between pb-3 border-b border-[var(--outline)]">
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-[var(--outline)] flex items-center justify-center">
-                            <div className="h-4 w-4 bg-[var(--foreground)] opacity-20 rounded-sm" />
-                          </div>
-                          <div className="space-y-1.5">
-                            <div className="h-3 w-24 bg-[var(--primary)] rounded-full opacity-80" />
-                            <div className="h-2 w-16 bg-[var(--outline)] rounded-full" />
-                          </div>
-                        </div>
-                        <div className="h-3 w-16 bg-[var(--foreground)] opacity-40 rounded-full" />
-                      </div>
-
-                    </div>
-                  </div>
-
-                  {/* Bottom Nav Flat */}
-                  <div className="absolute bottom-0 left-0 right-0 h-16 border-t border-[var(--outline)] bg-[var(--surface-container)] flex items-center justify-around px-4">
-                    <div className="h-6 w-6 rounded-md bg-[var(--primary)]" />
-                    <div className="h-6 w-6 rounded-md bg-[var(--outline)]" />
-                    <div className="relative -top-5 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--primary)] border-4 border-[var(--surface-container)]">
-                      <div className="h-4 w-4 bg-[var(--on-primary)] rounded-sm" />
-                    </div>
-                    <div className="h-6 w-6 rounded-md bg-[var(--outline)]" />
-                    <div className="h-6 w-6 rounded-md bg-[var(--outline)]" />
-                  </div>
-                </div>
-              </div>
+              <Logo3D />
             </motion.div>
           </div>
 
