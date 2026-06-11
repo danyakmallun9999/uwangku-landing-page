@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Float } from "@react-three/drei";
+import { useGLTF, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
 
@@ -17,7 +17,7 @@ const COLOR_BOTTOM = new THREE.Color("#0FAF9A").multiplyScalar(1.55);
 const COLOR_MIDDLE = new THREE.Color("#35D6A3").multiplyScalar(1.55);
 const COLOR_TOP    = new THREE.Color("#FFE68A").multiplyScalar(1.4);
 const GRADIENT_MID = 0.5;
-const TARGET_HEIGHT = 2.6; // world-unit height — comfortable size with padding
+const TARGET_HEIGHT = 3.2;
 
 function sampleGradient(t: number, out: THREE.Color): void {
   const tc = Math.max(0, Math.min(1, t));
@@ -77,12 +77,12 @@ function LogoModel({ paused }: { paused: boolean }) {
 
       geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-      // MeshPhongMaterial = classic plastic: vivid diffuse + specular highlight
+      // MeshPhongMaterial — high shininess = tight glossy specular (kilap)
       mesh.material = new THREE.MeshPhongMaterial({
         vertexColors: true,
-        shininess:    90,
-        specular:     new THREE.Color("#d0fff8"),
-        side:         THREE.DoubleSide, // never lose a face on rotation
+        shininess:    280,                       // 280 = sangat kilap (hard gloss)
+        specular:     new THREE.Color("#ffffff"), // putih murni = highlight terang
+        side:         THREE.DoubleSide,
         transparent:  false,
         opacity:      1,
       });
@@ -95,20 +95,47 @@ function LogoModel({ paused }: { paused: boolean }) {
     return { object: root, fitScale: fit };
   }, [scene]);
 
+  const floatRef = useRef({ t: 0 });
+  const introRef = useRef({ progress: 0, done: false });
+  const INTRO_DURATION = 1.4; // seconds
+  const TARGET_RX = -0.20;  // tilt forward (kebalikan)
+  const TARGET_RY =  0.22;  // rotate right showing left edge (kebalikan)
+
   useFrame((_, delta) => {
-    if (paused || !groupRef.current) return;
-    groupRef.current.rotation.y += Math.min(delta, 0.05) * 0.25;
+    if (!groupRef.current) return;
+
+    // ── Phase 1: intro zoom (always runs, ignores paused) ──
+    if (!introRef.current.done) {
+      introRef.current.progress = Math.min(1, introRef.current.progress + delta / INTRO_DURATION);
+      // Cubic ease-out: fast at start, soft landing
+      const p = 1 - Math.pow(1 - introRef.current.progress, 3);
+
+      groupRef.current.scale.setScalar(fitScale * p);
+      groupRef.current.rotation.x = TARGET_RX * p;
+      groupRef.current.rotation.y = TARGET_RY * p;
+
+      if (introRef.current.progress >= 1) {
+        introRef.current.done = true;
+        floatRef.current.t = 0; // sync float so no position jump
+      }
+      return;
+    }
+
+    // ── Phase 2: continuous float + slow Y rotation ──
+    if (paused) return;
+    groupRef.current.rotation.y -= Math.min(delta, 0.05) * 0.25;
+    floatRef.current.t += delta * 0.8;
+    groupRef.current.position.y = Math.sin(floatRef.current.t) * 0.06;
   });
 
+  // scale=0 and rotation=[0,0,0] → intro animation overrides immediately in useFrame
   return (
-    <Float speed={1.0} rotationIntensity={0.04} floatIntensity={0.2} floatingRange={[-0.03, 0.03]}>
-      {/* Isometric-ish angle that shows both front face and extruded depth */}
-      <group ref={groupRef} scale={fitScale} rotation={[0.28, -0.55, 0]}>
-        <primitive object={object} />
-      </group>
-    </Float>
+    <group ref={groupRef} scale={0} rotation={[0, 0, 0]}>
+      <primitive object={object} />
+    </group>
   );
 }
+
 
 // ─── Lighting ─────────────────────────────────────────────────────────────────
 
@@ -123,7 +150,7 @@ function BrandLights() {
        * Rim 0.20 from behind outlines the silhouette edges clearly.
        */}
       <ambientLight intensity={0.70} />
-      <directionalLight position={[ 3,  8,  6]} intensity={0.55} color="#ffffff" />
+      <directionalLight position={[ 3,  8,  6]} intensity={0.75} color="#ffffff" />
       <directionalLight position={[-4,  3,  5]} intensity={0.14} color="#ffffff" />
       <directionalLight position={[ 0,  3, -6]} intensity={0.20} color="#ffffff" />
       <directionalLight position={[ 0, -5,  3]} intensity={0.07} color="#ffffff" />
@@ -177,7 +204,7 @@ export default function Logo3D() {
       <Canvas
         dpr={[1, 2]}
         frameloop={paused ? "never" : "always"}
-        camera={{ position: [0, 0.8, 6], fov: 44 }}
+        camera={{ position: [0, 0.8, 5.2], fov: 46 }}
         style={{ width: "100%", height: "100%" }}
         gl={{
           antialias:       true,
@@ -218,4 +245,4 @@ export default function Logo3D() {
   );
 }
 
-useGLTF.preload("/uwangku-logo.glb");
+useGLTF.preload("/uwangku-logo-clean.glb");
