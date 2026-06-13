@@ -43,7 +43,7 @@ export default function HeroSection() {
 
   const downloadLinks = {
     windows: "/uwangku-apps/Uwangku-Windows.zip",
-    android: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v1.0.6/uwangku-release-v1.0.6.apk",
+    android: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v2.0.2/uwangku-v2.0.2.apk",
   };
 
   return (
