@@ -20,7 +20,7 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[var(--foreground)] opacity-50">
-            <a href="#" className="hover:opacity-100 transition-opacity">Syarat & Ketentuan</a>
+            <Link href="/terms" className="hover:opacity-100 transition-opacity">Syarat & Ketentuan</Link>
             <Link href="/privacy" className="hover:opacity-100 transition-opacity">Kebijakan Privasi</Link>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">GitHub</a>
           </div>
