@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -20,7 +21,7 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[var(--foreground)] opacity-50">
             <a href="#" className="hover:opacity-100 transition-opacity">Syarat & Ketentuan</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">Kebijakan Privasi</a>
+            <Link href="/privacy" className="hover:opacity-100 transition-opacity">Kebijakan Privasi</Link>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">GitHub</a>
           </div>
 

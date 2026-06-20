@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
@@ -16,7 +17,7 @@ export default function Navbar() {
 
           {/* Logo Brand — logo only, no background container */}
           <div className="flex items-center gap-2.5">
-            <a href="#" className="flex items-center gap-2.5 transition-opacity hover:opacity-85">
+            <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-85">
               <Image
                 src="/images/uwangku-logo.png"
                 alt="Uwangku Logo"
@@ -27,25 +28,25 @@ export default function Navbar() {
               <span className="font-heading text-xl font-extrabold tracking-tight text-[var(--foreground)]">
                 Uwangku
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <a
-              href="#fitur"
+              href="/#fitur"
               className="text-sm font-semibold text-[var(--foreground)] opacity-70 transition-opacity hover:opacity-100"
             >
               Fitur Utama
             </a>
             <a
-              href="#keamanan"
+              href="/#keamanan"
               className="text-sm font-semibold text-[var(--foreground)] opacity-70 transition-opacity hover:opacity-100"
             >
               Arsitektur Data
             </a>
             <a
-              href="#download"
+              href="/#download"
               className="text-sm font-semibold text-[var(--foreground)] opacity-70 transition-opacity hover:opacity-100"
             >
               Unduhan
@@ -70,7 +71,7 @@ export default function Navbar() {
 
             {/* Download CTA */}
             <a
-              href="#download"
+              href="/#download"
               id="navbar-cta-btn"
               className="m3-button-pill m3-button-primary px-5 py-2.5 text-sm"
             >
@@ -108,28 +109,28 @@ export default function Navbar() {
         <div className="md:hidden border-b border-[var(--outline)] bg-[var(--surface-container)] px-4 py-3">
           <div className="space-y-2">
             <a
-              href="#fitur"
+              href="/#fitur"
               onClick={() => setIsOpen(false)}
               className="block rounded-lg px-3 py-2.5 text-base font-semibold text-[var(--foreground)] hover:bg-[var(--outline)] transition-colors"
             >
               Fitur Utama
             </a>
             <a
-              href="#keamanan"
+              href="/#keamanan"
               onClick={() => setIsOpen(false)}
               className="block rounded-lg px-3 py-2.5 text-base font-semibold text-[var(--foreground)] hover:bg-[var(--outline)] transition-colors"
             >
               Arsitektur Data
             </a>
             <a
-              href="#download"
+              href="/#download"
               onClick={() => setIsOpen(false)}
               className="block rounded-lg px-3 py-2.5 text-base font-semibold text-[var(--foreground)] hover:bg-[var(--outline)] transition-colors"
             >
               Unduhan
             </a>
             <a
-              href="#download"
+              href="/#download"
               onClick={() => setIsOpen(false)}
               className="m3-button-pill m3-button-primary mt-4 w-full py-3 text-base"
             >
