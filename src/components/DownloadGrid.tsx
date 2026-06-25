@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, Clock } from "lucide-react";
+import { Download, Clock, ExternalLink } from "lucide-react";
 import Image from "next/image";
 
 interface Platform {
@@ -13,10 +13,22 @@ interface Platform {
   actionLabel: string;
   actionUrl: string;
   isAvailable: boolean;
+  isExternal?: boolean;
 }
 
 export default function DownloadGrid() {
   const platforms: Platform[] = [
+    {
+      platform: "Play Store",
+      tag: "Android",
+      format: "Google Play Store",
+      version: "v1.0.0 Stable",
+      icon: "/images/playstore-icon.png",
+      actionLabel: "Temukan di Play Store",
+      actionUrl: "https://play.google.com/store/apps/details?id=app.uwangku.uwangku&pcampaignid=web_share",
+      isAvailable: true,
+      isExternal: true,
+    },
     {
       platform: "Windows",
       tag: "Desktop",
@@ -26,6 +38,7 @@ export default function DownloadGrid() {
       actionLabel: "Unduh untuk Windows",
       actionUrl: "/uwangku-apps/Uwangku-Windows.zip",
       isAvailable: true,
+      isExternal: false,
     },
     {
       platform: "Android",
@@ -34,28 +47,9 @@ export default function DownloadGrid() {
       version: "v1.0.0 Stable",
       icon: "/images/android-icon.png",
       actionLabel: "Unduh .APK Android",
-      actionUrl: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v2.0.2/uwangku-v2.0.2.apk",
+      actionUrl: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v2.0.6/app-release.apk",
       isAvailable: true,
-    },
-    {
-      platform: "Play Store",
-      tag: "Android",
-      format: "Google Play — Coming Soon",
-      version: "Dalam Pengembangan",
-      icon: "/images/playstore-icon.png",
-      actionLabel: "Belum Tersedia",
-      actionUrl: "#",
-      isAvailable: false,
-    },
-    {
-      platform: "Web App",
-      tag: "Browser",
-      format: "Progressive Web App",
-      version: "Dalam Pengembangan",
-      icon: "/images/internet-icon.png",
-      actionLabel: "Belum Tersedia",
-      actionUrl: "#",
-      isAvailable: false,
+      isExternal: false,
     },
   ];
 
@@ -73,7 +67,7 @@ export default function DownloadGrid() {
         </div>
 
         {/* Platform Grid */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {platforms.map((p) => (
             <div
               key={p.platform}
@@ -116,11 +110,17 @@ export default function DownloadGrid() {
                 {p.isAvailable ? (
                   <a
                     href={p.actionUrl}
-                    download={p.actionUrl !== "#"}
+                    download={p.isExternal ? undefined : true}
+                    target={p.isExternal ? "_blank" : undefined}
+                    rel={p.isExternal ? "noopener noreferrer" : undefined}
                     className="m3-button-pill m3-button-primary w-full py-3 text-sm"
                   >
                     {p.actionLabel}
-                    <Download className="ml-2 h-4 w-4" />
+                    {p.isExternal ? (
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    ) : (
+                      <Download className="ml-2 h-4 w-4" />
+                    )}
                   </a>
                 ) : (
                   <div className="m3-button-pill w-full py-3 text-sm border border-dashed border-[var(--outline)] text-[var(--foreground)] opacity-40 flex items-center justify-center gap-2 cursor-not-allowed">

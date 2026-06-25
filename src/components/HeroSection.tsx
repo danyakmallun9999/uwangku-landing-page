@@ -43,7 +43,7 @@ export default function HeroSection() {
 
   const downloadLinks = {
     windows: "/uwangku-apps/Uwangku-Windows.zip",
-    android: "https://github.com/danyakmallun9999/uwangku-landing-page/releases/download/v2.0.2/uwangku-v2.0.2.apk",
+    android: "https://play.google.com/store/apps/details?id=app.uwangku.uwangku&pcampaignid=web_share",
   };
 
   return (
@@ -93,12 +93,13 @@ export default function HeroSection() {
               {mounted && os === "android" ? (
                 <a
                   href={downloadLinks.android}
-                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="m3-button-pill m3-button-primary w-full px-8 py-4 text-base sm:w-auto hover:-translate-y-0.5"
                 >
                   <AndroidIcon />
-                  Unduh .APK Android
-                  <ArrowDown className="ml-2 h-5 w-5" />
+                  Unduh di Google Play
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               ) : (
                 <a
