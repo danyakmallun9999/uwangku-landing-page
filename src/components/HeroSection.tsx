@@ -60,7 +60,7 @@ export default function HeroSection() {
               className="mx-auto lg:mx-0"
             >
               <span className="inline-flex items-center rounded-full border border-[var(--outline)] bg-[var(--surface-container)] px-4 py-1.5 text-xs font-bold tracking-wide text-[var(--foreground)] uppercase">
-                Versi 1.0 Tersedia
+                Versi 2.0.3++ Tersedia
               </span>
             </motion.div>
 
